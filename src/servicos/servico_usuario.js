@@ -24,3 +24,4 @@ export async function cadastrarUsuario(nome, email, senha){
   console.log(resposta[0]);
 
 }
+
