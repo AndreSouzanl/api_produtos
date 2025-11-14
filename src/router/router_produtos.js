@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const {nome, descricao, quantidade, unidade, criado_por} = req.body;
   const ProdutoValido = validaProduto(nome, descricao, quantidade, unidade, criado_por);
+  
   if (!ProdutoValido.status) {
     await cadastrarProduto(nome, descricao, quantidade, unidade, criado_por);
     res.status(204).end();
