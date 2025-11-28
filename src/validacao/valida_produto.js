@@ -19,7 +19,7 @@ function validaQuantidade(quantidade) {
 
 // Lista restrita de unidades válidas
 function validaUnidade(unidade) {
-  const unidadesValidas = ['un', 'kg', 'lt', 'cx', 'm', 'g', 'pc'];
+  const unidadesValidas = ["un", "kg", "lt", "cx", "m", "g", "pc"];
   return unidadesValidas.includes(unidade);
 }
 
@@ -46,7 +46,16 @@ function validaStatus(status) {
 }
 
 // --- Função principal que agrupa todas as validações ---
-export function validaProduto(nome, descricao, quantidade, unidade, criado_por,atualizado_por, removido_por, status) {
+export function validaProduto(
+  nome,
+  descricao,
+  quantidade,
+  unidade,
+  criado_por,
+  atualizado_por,
+  removido_por,
+  status
+) {
   const nomeValido = validaNome(nome);
   const descricaoValida = validaDescricao(descricao);
   const quantidadeValida = validaQuantidade(quantidade);
@@ -54,38 +63,66 @@ export function validaProduto(nome, descricao, quantidade, unidade, criado_por,a
   const criadoPorValido = validaCriadoPor(criado_por);
   const atualizarValido = validaAtualizadoPor(atualizado_por);
   const removidoValido = validaRemovidoPor(removido_por);
+  const statusValido = validaStatus(status);
 
   if (!nomeValido) {
-    return { status: false, mensagem: 'Nome inválido. Deve ter pelo menos 2 caracteres.' };
+    return {
+      status: false,
+      mensagem: "Nome inválido. Deve ter pelo menos 2 caracteres.",
+    };
   }
 
   if (!descricaoValida) {
-    return { status: false, mensagem: 'Descrição inválida. Deve ter entre 3 e 500 caracteres.' };
+    return {
+      status: false,
+      mensagem: "Descrição inválida. Deve ter entre 3 e 500 caracteres.",
+    };
   }
 
   if (!quantidadeValida) {
-    return { status: false, mensagem: 'Quantidade inválida. Deve ser um número inteiro igual ou maior que 0.' };
+    return {
+      status: false,
+      mensagem:
+        "Quantidade inválida. Deve ser um número inteiro igual ou maior que 0.",
+    };
   }
 
   if (!unidadeValida) {
-    return { status: false, mensagem: 'Unidade inválida. Use: un, kg, lt, cx, m, g ou pc.' };
+    return {
+      status: false,
+      mensagem: "Unidade inválida. Use: un, kg, lt, cx, m, g ou pc.",
+    };
   }
 
   if (!criadoPorValido) {
-    return { status: false, mensagem: 'Campo criado_por inválido. Deve ser um número inteiro positivo.' };
+    return {
+      status: false,
+      mensagem:
+        "Campo criado_por inválido. Deve ser um número inteiro positivo.",
+    };
   }
-  
+
   if (!atualizarValido) {
-    return { status: false, mensagem: 'Campo remocão inválido. Deve ser um número inteiro positivo.' };
+    return {
+      status: false,
+      mensagem: "Campo remocão inválido. Deve ser um número inteiro positivo.",
+    };
   }
-  
+
   if (!removidoValido) {
-    return { status: false, mensagem: 'Campo atualizar inválido. Deve ser um número inteiro positivo.' };
+    return {
+      status: false,
+      mensagem:
+        "Campo atualizar inválido. Deve ser um número inteiro positivo.",
+    };
   }
 
-  if (!validaStatus(status)) {
-    return { status: false, mensagem: 'Status inválido. Use: ativo, editado, removido ou finalizado.' };
+  if (!statusValido(status)) {
+    return {
+      status: false,
+      mensagem: "Status inválido. Use: ativo, editado, removido ou finalizado.",
+    };
   }
 
-  return { status: true, mensagem: '' };
+  return { status: true, mensagem: "" };
 }
