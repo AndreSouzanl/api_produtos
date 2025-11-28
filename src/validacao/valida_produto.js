@@ -41,7 +41,7 @@ function validaRemovidoPor(removido_por) {
 
 //  NOVA: valida status (enum)
 function validaStatus(status) {
-  const statusRegex = /^(ativo|editado|removido|finalizado)$/;
+  const statusRegex = /^(ativo|editado|removido)$/;
   return statusRegex.test(status);
 }
 
@@ -120,7 +120,7 @@ export function validaProduto(
   if (!statusValido(status)) {
     return {
       status: false,
-      mensagem: "Status inválido. Use: ativo, editado, removido ou finalizado.",
+      mensagem: "Status inválido. Use: ativo, editado, removido.",
     };
   }
 
