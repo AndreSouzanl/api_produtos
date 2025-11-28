@@ -28,14 +28,32 @@ function validaCriadoPor(criado_por) {
   const criadoRegex = /^\d+$/;
   return criadoRegex.test(criado_por) && parseInt(criado_por) > 0;
 }
+// Deve ser número inteiro positivo
+function validaAtualizadoPor(atualizado_por) {
+  const criadoRegex = /^\d+$/;
+  return criadoRegex.test(atualizado_por) && parseInt(atualizado_por) > 0;
+}
+// Deve ser número inteiro positivo
+function validaRemovidoPor(removido_por) {
+  const criadoRegex = /^\d+$/;
+  return criadoRegex.test(removido_por) && parseInt(removido_por) > 0;
+}
+
+//  NOVA: valida status (enum)
+function validaStatus(status) {
+  const statusRegex = /^(ativo|editado|removido|finalizado)$/;
+  return statusRegex.test(status);
+}
 
 // --- Função principal que agrupa todas as validações ---
-export function validaProduto(nome, descricao, quantidade, unidade, criado_por) {
+export function validaProduto(nome, descricao, quantidade, unidade, criado_por,atualizado_por, removido_por, status) {
   const nomeValido = validaNome(nome);
   const descricaoValida = validaDescricao(descricao);
   const quantidadeValida = validaQuantidade(quantidade);
   const unidadeValida = validaUnidade(unidade);
   const criadoPorValido = validaCriadoPor(criado_por);
+  const atualizarValido = validaAtualizadoPor(atualizado_por);
+  const removidoValido = validaRemovidoPor(removido_por);
 
   if (!nomeValido) {
     return { status: false, mensagem: 'Nome inválido. Deve ter pelo menos 2 caracteres.' };
@@ -55,6 +73,18 @@ export function validaProduto(nome, descricao, quantidade, unidade, criado_por) 
 
   if (!criadoPorValido) {
     return { status: false, mensagem: 'Campo criado_por inválido. Deve ser um número inteiro positivo.' };
+  }
+  
+  if (!atualizarValido) {
+    return { status: false, mensagem: 'Campo remocão inválido. Deve ser um número inteiro positivo.' };
+  }
+  
+  if (!removidoValido) {
+    return { status: false, mensagem: 'Campo atualizar inválido. Deve ser um número inteiro positivo.' };
+  }
+
+  if (!validaStatus(status)) {
+    return { status: false, mensagem: 'Status inválido. Use: ativo, editado, removido ou finalizado.' };
   }
 
   return { status: true, mensagem: '' };

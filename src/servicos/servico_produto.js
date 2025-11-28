@@ -13,7 +13,7 @@ export async function cadastrarProduto(nome, descricao, quantidade, unidade, cri
   const conexao = await pool.getConnection();
 
   const resposta = await conexao.query(
-    "INSERT INTO produtos (nome,descricao, quantidade, unidade, criado_por) VALUES (?, ?, ?, ?, ?)",[nome, descricao, quantidade, unidade, criado_por]
+    "INSERT INTO produtos (nome, descricao, quantidade, unidade, criado_por) VALUES (?, ?, ?, ?, ?)",[nome, descricao, quantidade, unidade, criado_por]
   )
   conexao.release();
   console.log(resposta[0]);
