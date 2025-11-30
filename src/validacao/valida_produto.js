@@ -126,3 +126,39 @@ export function validaProduto(
 
   return { status: true, mensagem: "" };
 }
+
+export function validaProdutoAtualizacao(
+  nome,
+  descricao,
+  quantidade,
+  unidade,
+  atualizado_por,
+  status
+) {
+  if (!validaNome(nome)) {
+    return { status: false, mensagem: "Nome inválido." };
+  }
+
+  if (!validaDescricao(descricao)) {
+    return { status: false, mensagem: "Descrição inválida." };
+  }
+
+  if (!validaQuantidade(quantidade)) {
+    return { status: false, mensagem: "Quantidade inválida." };
+  }
+
+  if (!validaUnidade(unidade)) {
+    return { status: false, mensagem: "Unidade inválida." };
+  }
+
+  if (!validaAtualizadoPor(atualizado_por)) {
+    return { status: false, mensagem: "atualizado_por inválido." };
+  }
+
+  if (!validaStatus(status)) {
+    return { status: false, mensagem: "Status inválido." };
+  }
+
+  return { status: true };
+}
+

@@ -18,3 +18,12 @@ export async function cadastrarProduto(nome, descricao, quantidade, unidade, cri
   conexao.release();
   console.log(resposta[0]);
 }
+
+export async function atualizarProduto(id, nome, descricao, quantidade, unidade, atualizado_por, status) {
+  const conexao = await pool.getConnection(); 
+  const resposta = await conexao.query(
+    "UPDATE produtos SET nome = ?, descricao = ?, quantidade = ?, unidade = ?, atualizado_por = ?, status = ? WHERE id = ?",[nome, descricao, quantidade, unidade, atualizado_por, status, id]
+  )
+  conexao.release();
+  console.log(resposta[0]);
+}
