@@ -52,18 +52,14 @@ export function validaProduto(
   quantidade,
   unidade,
   criado_por,
-  atualizado_por,
-  removido_por,
-  status
+  
 ) {
   const nomeValido = validaNome(nome);
   const descricaoValida = validaDescricao(descricao);
   const quantidadeValida = validaQuantidade(quantidade);
   const unidadeValida = validaUnidade(unidade);
   const criadoPorValido = validaCriadoPor(criado_por);
-  const atualizarValido = validaAtualizadoPor(atualizado_por);
-  const removidoValido = validaRemovidoPor(removido_por);
-  const statusValido = validaStatus(status);
+  
 
   if (!nomeValido) {
     return {
@@ -101,29 +97,6 @@ export function validaProduto(
         "Campo criado_por inválido. Deve ser um número inteiro positivo.",
     };
   }
-
-  if (!atualizarValido) {
-    return {
-      status: false,
-      mensagem: "Campo remocão inválido. Deve ser um número inteiro positivo.",
-    };
-  }
-
-  if (!removidoValido) {
-    return {
-      status: false,
-      mensagem:
-        "Campo atualizar inválido. Deve ser um número inteiro positivo.",
-    };
-  }
-
-  if (!statusValido(status)) {
-    return {
-      status: false,
-      mensagem: "Status inválido. Use: ativo, editado, removido.",
-    };
-  }
-
   return { status: true, mensagem: "" };
 }
 

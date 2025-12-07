@@ -17,9 +17,6 @@ app.use('/login', rotaAutenticacao);
 app.use('/produtos', rotaProduto);
 app.use('/produtos', rotaAtualizarProduto);
 
-// criar router para editarProdutos  e separar a logica da camada de servico criando
-// a funcao atualizarProduto no servico_produto.js em outro arquivo. 
-
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}...`);
 });

@@ -12,11 +12,22 @@ export async function obterProdutos() {
 export async function cadastrarProduto(nome, descricao, quantidade, unidade, criado_por) {
   const conexao = await pool.getConnection();
 
-  const resposta = await conexao.query(
+  const [resposta] = await conexao.query(
     "INSERT INTO produtos (nome, descricao, quantidade, unidade, criado_por) VALUES (?, ?, ?, ?, ?)",[nome, descricao, quantidade, unidade, criado_por]
   )
   conexao.release();
-  console.log(resposta[0]);
+  console.log("Resultado do INSERT:", resposta); 
+
+  // Retornar o produto inserido
+  return {
+    id: resposta.insertId,
+    nome,
+    descricao,
+    quantidade,
+    unidade,
+    criado_por,
+  };
+
 }
 
 export async function atualizarProduto(id, nome, descricao, quantidade, unidade, atualizado_por, status) {

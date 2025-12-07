@@ -32,16 +32,19 @@ router.post("/", async (req, res) => {
   );
 
   if (!ProdutoValido.status) {
-    await cadastrarProduto(nome, descricao, quantidade, unidade, criado_por);
-    res.status(204).end();
-  } else {
-    res.status(400).json({ mensagem: ProdutoValido.mensagem });
-  }
+     res.status(400).json({ mensagem: ProdutoValido.mensagem });
+  } 
+
+  const produtoCriado = await cadastrarProduto(nome, descricao, quantidade, unidade, criado_por);
+  
+  res.status(201).json({mensagem: "Produto cadastrado com sucesso!", produto: produtoCriado});
+  
 });
 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { nome, descricao, quantidade, unidade, atualizado_por, status } = req.body;
+  const { nome, descricao, quantidade, unidade, atualizado_por, status } =
+    req.body;
   // 1. validação
   const ProdutoValido = validaProdutoAtualizacao(
     nome,
