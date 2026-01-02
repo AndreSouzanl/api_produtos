@@ -25,3 +25,22 @@ export async function cadastrarUsuario(nome, email, senha){
 
 }
 
+export async function obterUsuarioPorEmail(email) {
+  const conexao = await pool.getConnection();
+
+  const [rows] = await conexao.query(
+    "SELECT * FROM usuarios WHERE email = ? LIMIT 1",
+    [email]
+  );
+
+  conexao.release();
+
+  // se não encontrar usuário
+  if (rows.length === 0) {
+    return null;
+  }
+
+  // retorna o usuário encontrado
+  return rows[0];
+}
+

@@ -135,3 +135,14 @@ export function validaProdutoAtualizacao(
   return { status: true };
 }
 
+export function validaRemocao(removido_por) {
+  const valido = validaRemovidoPor(removido_por); // boolean
+
+  if (!valido) {
+    return { status: false, mensagem: "Usuário inválido para remoção." };
+  }
+
+  return { status: true };
+}
+
+
