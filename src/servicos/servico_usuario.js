@@ -44,3 +44,49 @@ export async function obterUsuarioPorEmail(email) {
   return rows[0];
 }
 
+// salva token no banco
+export async function salvarTokenReset(usuarioId, token, expires) {
+  const conexao = await pool.getConnection();
+
+  await conexao.query(
+    'UPDATE usuarios SET reset_token = ?, reset_token_expires = ? WHERE id = ?',
+    [token, expires, usuarioId]
+  );
+
+  conexao.release();
+}
+
+// busca usuário pelo token
+export async function obterUsuarioPorToken(token) {
+  const conexao = await pool.getConnection();
+
+  const [rows] = await conexao.query(
+    `SELECT * FROM usuarios
+     WHERE reset_token = ?
+       AND reset_token_expires > NOW()
+     LIMIT 1`,
+    [token]
+  );
+
+  conexao.release();
+  return rows.length ? rows[0] : null;
+}
+
+// atualiza senha e remove token
+export async function atualizarSenha(usuarioId, novaSenha) {
+  const conexao = await pool.getConnection();
+
+  const senhaHash = await bcrypt.hash(novaSenha, 6);
+
+  await conexao.query(
+    `UPDATE usuarios
+     SET senha = ?,
+         reset_token = NULL,
+         reset_token_expires = NULL
+     WHERE id = ?`,
+    [senhaHash, usuarioId]
+  );
+
+  conexao.release();
+}
+
