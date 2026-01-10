@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 export async function validaDadosAutenticacao(email, senha) {
   const conexao = await pool.getConnection();
   try {
+    email = email.toLowerCase();
     const [resposta] = await conexao.query(
       "SELECT * FROM usuarios WHERE email = ?",
       [email]

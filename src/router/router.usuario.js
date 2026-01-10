@@ -47,10 +47,9 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // hash da senha
-    const senhaHash = await bcrypt.hash(senha, 10);
+    
 
-    await cadastrarUsuario(nome, email, senhaHash);
+    await cadastrarUsuario(nome, email,senha);
 
     return res.status(201).json({
       mensagem: "Usuário cadastrado com sucesso",
