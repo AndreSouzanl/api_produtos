@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcryptjs";
+
 import crypto from "crypto";
 import {
   obterUsuario,
@@ -7,11 +7,10 @@ import {
   obterUsuarioPorEmail,
   salvarTokenReset,
   obterUsuarioPorToken,
-  atualizarSenha
+  atualizarSenha,
 } from "../servicos/servico_usuario.js";
 import { enviarEmailReset } from "../servicos/servico_email.js";
 import { validaUsuario } from "../validacao/valida_usuario.js";
-
 
 const router = express.Router();
 
@@ -47,9 +46,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    
-
-    await cadastrarUsuario(nome, email,senha);
+    await cadastrarUsuario(nome, email, senha);
 
     return res.status(201).json({
       mensagem: "Usuário cadastrado com sucesso",
@@ -84,7 +81,8 @@ router.post("/forgot-password", async (req, res) => {
     }
 
     return res.status(200).json({
-      mensagem: "Se o email existir, enviaremos instruções para redefinir a senha.",
+      mensagem:
+        "Se o email existir, enviaremos instruções para redefinir a senha.",
     });
   } catch (error) {
     console.error("Erro no forgot-password:", error);
@@ -125,10 +123,4 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
-
-
-
 export default router;
-
-
-

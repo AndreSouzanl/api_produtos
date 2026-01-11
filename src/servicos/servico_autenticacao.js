@@ -1,4 +1,7 @@
+
 import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // gera um token JWT para o usuário autenticado (logado)
 export function gerarToken(usuario) {
