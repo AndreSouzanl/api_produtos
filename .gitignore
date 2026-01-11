@@ -1,7 +1,8 @@
+# Variáveis de ambiente
+.env
+.env.local
+.env.*
+!.env.example
 
 # Dependências
 node_modules/
-
-# Ignora toda a pasta env
-env/
-
