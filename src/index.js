@@ -24,3 +24,4 @@ app.use('/produtos', rotaAtualizarProduto);
 app.listen(PORT, () => {
  console.log("Servidor rodando na porta: ", process.env.PORT);
 });
+
