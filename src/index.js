@@ -11,10 +11,17 @@ import rotaProduto from './router/router_produtos.js';
 import rotaAtualizarProduto from './router/router.usuario.js';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 9000;
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL?.split(",") || ["http://localhost:3000"],
+  credentials: true
+}));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("API rodando 🚀");
+});
 
 app.use('/usuarios', rotaUsuario);
 app.use('/login', rotaAutenticacao);
@@ -22,6 +29,6 @@ app.use('/produtos', rotaProduto);
 app.use('/produtos', rotaAtualizarProduto);
 
 app.listen(PORT, () => {
- console.log("Servidor rodando na porta: ", process.env.PORT);
+ console.log("Servidor rodando na porta: ", PORT);
 });
 
