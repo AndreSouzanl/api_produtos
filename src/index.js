@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ quiet: true });
+process.env.NODE_OPTIONS = '--dns-result-order=ipv4first';
 
 
 import express from "express";
