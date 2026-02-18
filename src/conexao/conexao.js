@@ -12,7 +12,7 @@
 // });
 
 // export default pool;
-
+process.env.NODE_OPTIONS = '--dns-result-order=ipv4first';
 import dotenv from "dotenv";
 dotenv.config();
 
