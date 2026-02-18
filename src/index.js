@@ -13,7 +13,7 @@ import rotaAtualizarProduto from './router/router.usuario.js';
 const app = express();
 const PORT = process.env.PORT || 9000;
 
-app.options("*", cors()); // importante para preflight
+
 app.use(express.json());
 
 app.use(cors({
@@ -25,8 +25,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API rodando 🚀");
 });
-
-
 
 app.use('/usuarios', rotaUsuario);
 app.use('/login', rotaAutenticacao);
