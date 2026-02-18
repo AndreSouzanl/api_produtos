@@ -13,16 +13,11 @@ import rotaAtualizarProduto from './router/router.usuario.js';
 const app = express();
 const PORT = process.env.PORT || 9000;
 
+app.options("*", cors()); // importante para preflight
+app.use(express.json());
+
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = process.env.FRONTEND_URL?.split(",") || ["http://localhost:3000"];
-    
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: "https://lista-compras-frontend-cu31.vercel.app",
   credentials: true
 }));
 
