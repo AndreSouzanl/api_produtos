@@ -26,6 +26,12 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("API rodando 🚀");
+});
+
+
 
 app.use('/usuarios', rotaUsuario);
 app.use('/login', rotaAutenticacao);
