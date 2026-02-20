@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ quiet: true });
-import pool from "./conexao/conexao.js";
+
 
 import express from "express";
 import cors from "cors";
@@ -36,7 +36,5 @@ app.listen(PORT, () => {
   console.log("Servidor rodando na porta: ", PORT);
 });
 
-pool.connect()
-  .then(() => console.log("Banco conectado 🚀"))
-  .catch(err => console.error("Erro banco:", err));
+
 
