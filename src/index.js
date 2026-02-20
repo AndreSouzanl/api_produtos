@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ quiet: true });
 
-
-
 import express from "express";
 import cors from "cors";
 
@@ -12,7 +10,7 @@ import rotaProduto from "./router/router_produtos.js";
 // import rotaAtualizarProduto from './router/router.usuario.js';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -36,3 +34,5 @@ app.use("/produtos", rotaProduto);
 app.listen(PORT, () => {
   console.log("Servidor rodando na porta: ", PORT);
 });
+
+
