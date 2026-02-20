@@ -11,7 +11,6 @@
 //   connectionLimit: 10,
 // });
 
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -23,8 +22,6 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
-   family: 4, // 👈 FORÇA IPV4
 });
 
 export default pool;
-
