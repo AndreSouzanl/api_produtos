@@ -7,7 +7,9 @@ const EMAIL_PASS = "josq nwil ohbf dosy"; // senha de app gerada
 
 // Criando o transporte do Nodemailer
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // SSL
   auth: {
     user: EMAIL_USER,
     pass: EMAIL_PASS,
