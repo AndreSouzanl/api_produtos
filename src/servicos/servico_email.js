@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 // Função para enviar email de reset
 export async function enviarEmailReset(destinatario, token) {
-  const resetUrl = `http://localhost:3000/reset-password?token=${token}`;
+  const resetUrl = `https://lista-compras-frontend-cu31.vercel.app/reset-password?token=${token}`;
 
   const mailOptions = {
     from: EMAIL_USER,
@@ -34,3 +34,4 @@ export async function enviarEmailReset(destinatario, token) {
 
   await transporter.sendMail(mailOptions);
 }
+
